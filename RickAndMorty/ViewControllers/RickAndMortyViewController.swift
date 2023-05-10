@@ -9,11 +9,11 @@ import UIKit
 
 final class RickAndMortyViewController: UITableViewController {
     
-    private var result: [Result] = []
+    private var episode: [Episode] = []
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        tableView.rowHeight = 100
+        tableView.rowHeight = 150
         fetchEpisodes()
     }
 }
@@ -21,12 +21,12 @@ final class RickAndMortyViewController: UITableViewController {
 //MARK: - UITableViewDataSource
 extension RickAndMortyViewController {
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return result.count
+        return episode.count
     }
     
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: "episode", for: indexPath) as! EpisodeViewCell
-        let episodes = result[indexPath.row]
+        let cell = tableView.dequeueReusableCell(withIdentifier: "episodeName", for: indexPath) as! EpisodeViewCell
+        let episodes = episode[indexPath.row]
         cell.configure(with: episodes)
         
         return cell
@@ -36,7 +36,10 @@ extension RickAndMortyViewController {
 // MARK: - Networking
 extension RickAndMortyViewController {
     private func fetchEpisodes() {
-        guard let url = URL(string: "https://rickandmortyapi.com/api/episode/10,11,12,13,14,28") else { return }
+        guard let url = URL(
+            string: "https://rickandmortyapi.com/api/episode/1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24,25,26,27,28"
+        ) else { return }
+        
         URLSession.shared.dataTask(with: url) { data, _, error in
             guard let data else {
                 print(error?.localizedDescription ?? "No error description")
@@ -45,7 +48,7 @@ extension RickAndMortyViewController {
             
             do {
                 let decoder = JSONDecoder()
-                self.result = try decoder.decode([Result].self, from: data)
+                self.episode = try decoder.decode([Episode].self, from: data)
                 DispatchQueue.main.async {
                     self.tableView.reloadData()
                 }

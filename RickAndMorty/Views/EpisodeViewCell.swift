@@ -11,9 +11,11 @@ final class EpisodeViewCell: UITableViewCell {
 
     @IBOutlet weak var nameLabel: UILabel!
     @IBOutlet weak var numberLabel: UILabel!
+    @IBOutlet weak var dateLabel: UILabel!
 
-    func configure(with episode: Result) {
+    func configure(with episode: Episode) {
         nameLabel.text = episode.name
-        numberLabel.text = episode.episode
+        numberLabel.text = "Номер эпизода - \(episode.episode)"
+        dateLabel.text = episode.air_date
     }
 }
