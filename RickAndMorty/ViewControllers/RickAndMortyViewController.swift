@@ -10,6 +10,7 @@ import UIKit
 final class RickAndMortyViewController: UITableViewController {
     
     private var episode: [Episode] = []
+    private let networkManager = NetworkManager.shared
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -40,17 +41,35 @@ extension RickAndMortyViewController {
             string: "https://rickandmortyapi.com/api/episode/1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24,25,26,27,28"
         ) else { return }
         
-        URLSession.shared.dataTask(with: url) { data, _, error in
+        networkManager.fetch([Episode].self, from: url) { result in
+            switch result {
+            case .success(let episode):
+                print(episode)
+            case .failure(let error):
+                print(error)
+            }
+        }
+    }
+}
+
+extension RickAndMortyViewController {
+    func fetchCourses() {
+        guard let url = URL(
+            string: "https://rickandmortyapi.com/api/episode/1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24,25,26,27,28"
+        ) else { return }
+
+        URLSession.shared.dataTask(with: url) { [weak self] data, _, error in
             guard let data else {
                 print(error?.localizedDescription ?? "No error description")
                 return
             }
-            
+
             do {
                 let decoder = JSONDecoder()
-                self.episode = try decoder.decode([Episode].self, from: data)
+                decoder.keyDecodingStrategy = .convertFromSnakeCase
+                self?.episode = try decoder.decode([Episode].self, from: data)
                 DispatchQueue.main.async {
-                    self.tableView.reloadData()
+                    self?.tableView.reloadData()
                 }
             } catch {
                 print(error.localizedDescription)

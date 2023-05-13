@@ -13,9 +13,11 @@ final class EpisodeViewCell: UITableViewCell {
     @IBOutlet weak var numberLabel: UILabel!
     @IBOutlet weak var dateLabel: UILabel!
 
+    private let networkManager = NetworkManager.shared
+
     func configure(with episode: Episode) {
         nameLabel.text = episode.name
         numberLabel.text = "Номер эпизода - \(episode.episode)"
-        dateLabel.text = episode.air_date
+        dateLabel.text = episode.airDate
     }
 }

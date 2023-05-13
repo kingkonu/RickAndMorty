@@ -9,7 +9,12 @@
 struct Episode: Decodable {
     let name: String
     let episode: String
-    let air_date: String
-}
+    let airDate: String
 
+//    enum CodingKeys: String, CodingKey {
+//        case name = "name"
+//        case episode = "episode"
+//        case airDate = "air_date"
+//    }
+}
 

@@ -15,6 +15,7 @@
 		9F3DFF1D2A0C1CB7008F6976 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 9F3DFF1B2A0C1CB7008F6976 /* LaunchScreen.storyboard */; };
 		9F3DFF252A0C1D04008F6976 /* RickAndMortyViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9F3DFF242A0C1D04008F6976 /* RickAndMortyViewController.swift */; };
 		9F3DFF2D2A0C21B5008F6976 /* EpisodeViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9F3DFF2C2A0C21B5008F6976 /* EpisodeViewCell.swift */; };
+		9FA0D2482A0ECC9600910F52 /* NetworkManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9FA0D2472A0ECC9600910F52 /* NetworkManager.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -28,6 +29,7 @@
 		9F3DFF1E2A0C1CB7008F6976 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		9F3DFF242A0C1D04008F6976 /* RickAndMortyViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RickAndMortyViewController.swift; sourceTree = "<group>"; };
 		9F3DFF2C2A0C21B5008F6976 /* EpisodeViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EpisodeViewCell.swift; sourceTree = "<group>"; };
+		9FA0D2472A0ECC9600910F52 /* NetworkManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkManager.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -63,6 +65,7 @@
 				9F3DFF262A0C1DD1008F6976 /* ViewControllers */,
 				9F3DFF292A0C1DFF008F6976 /* Models */,
 				9F3DFF2E2A0C21B9008F6976 /* Views */,
+				9FA0D2462A0ECC5000910F52 /* Servises */,
 				9F3DFF2A2A0C1E14008F6976 /* Storyboards */,
 				9F3DFF2B2A0C1E2A008F6976 /* App */,
 				9F3DFF192A0C1CB7008F6976 /* Assets.xcassets */,
@@ -111,6 +114,14 @@
 				9F3DFF2C2A0C21B5008F6976 /* EpisodeViewCell.swift */,
 			);
 			path = Views;
+			sourceTree = "<group>";
+		};
+		9FA0D2462A0ECC5000910F52 /* Servises */ = {
+			isa = PBXGroup;
+			children = (
+				9FA0D2472A0ECC9600910F52 /* NetworkManager.swift */,
+			);
+			path = Servises;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -184,6 +195,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				9FA0D2482A0ECC9600910F52 /* NetworkManager.swift in Sources */,
 				9F3DFF112A0C1CB6008F6976 /* AppDelegate.swift in Sources */,
 				9F3D42D22A0C33950042DC0E /* Episode.swift in Sources */,
 				9F3DFF252A0C1D04008F6976 /* RickAndMortyViewController.swift in Sources */,
