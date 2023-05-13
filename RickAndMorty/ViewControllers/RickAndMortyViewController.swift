@@ -24,6 +24,10 @@ extension RickAndMortyViewController {
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return episode.count
     }
+
+    override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        tableView.deselectRow(at: indexPath, animated: true)
+    }
     
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "episodeName", for: indexPath) as! EpisodeViewCell
@@ -45,6 +49,8 @@ extension RickAndMortyViewController {
             switch result {
             case .success(let episode):
                 print(episode)
+                self.episode = episode
+                self.tableView.reloadData()
             case .failure(let error):
                 print(error)
             }
@@ -52,28 +58,3 @@ extension RickAndMortyViewController {
     }
 }
 
-extension RickAndMortyViewController {
-    func fetchCourses() {
-        guard let url = URL(
-            string: "https://rickandmortyapi.com/api/episode/1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24,25,26,27,28"
-        ) else { return }
-
-        URLSession.shared.dataTask(with: url) { [weak self] data, _, error in
-            guard let data else {
-                print(error?.localizedDescription ?? "No error description")
-                return
-            }
-
-            do {
-                let decoder = JSONDecoder()
-                decoder.keyDecodingStrategy = .convertFromSnakeCase
-                self?.episode = try decoder.decode([Episode].self, from: data)
-                DispatchQueue.main.async {
-                    self?.tableView.reloadData()
-                }
-            } catch {
-                print(error.localizedDescription)
-            }
-        }.resume()
-    }
-}
