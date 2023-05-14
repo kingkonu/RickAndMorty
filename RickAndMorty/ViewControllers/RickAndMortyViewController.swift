@@ -15,7 +15,23 @@ final class RickAndMortyViewController: UITableViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         tableView.rowHeight = 150
-        fetchEpisodes()
+        fetchEpisode()
+    }
+
+    private func fetchEpisode () {
+        guard let url = URL(
+            string: "https://rickandmortyapi.com/api/episode/1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24,25,26,27,28"
+        ) else { return }
+
+        networkManager.fetchEpisodes(from: url) { result in
+            switch result {
+            case .success(let episode):
+                self.episode = episode
+                self.tableView.reloadData()
+            case .failure(let error):
+                print(error.localizedDescription)
+            }
+        }
     }
 }
 
@@ -38,23 +54,4 @@ extension RickAndMortyViewController {
     }
 }
 
-// MARK: - Networking
-extension RickAndMortyViewController {
-    private func fetchEpisodes() {
-        guard let url = URL(
-            string: "https://rickandmortyapi.com/api/episode/1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24,25,26,27,28"
-        ) else { return }
-        
-        networkManager.fetch([Episode].self, from: url) { result in
-            switch result {
-            case .success(let episode):
-                print(episode)
-                self.episode = episode
-                self.tableView.reloadData()
-            case .failure(let error):
-                print(error)
-            }
-        }
-    }
-}
 
